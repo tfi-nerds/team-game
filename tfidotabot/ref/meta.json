@@ -1,0 +1,8 @@
+{
+    "content_files": [
+        "heroes.json",
+        "abilities.json",
+        "items.json"
+    ],
+    "version": "7.21"
+}
