@@ -27,7 +27,7 @@ DEALINGS IN THE SOFTWARE.
 import time
 import asyncio
 
-import discord.abc
+import tfidotabot.abc
 from .permissions import Permissions
 from .enums import ChannelType, try_enum
 from .mixins import Hashable
@@ -50,7 +50,7 @@ async def _single_delete_strategy(messages):
     for m in messages:
         await m.delete()
 
-class TextChannel(discord.abc.Messageable, discord.abc.GuildChannel, Hashable):
+class TextChannel(tfidotabot.abc.Messageable, tfidotabot.abc.GuildChannel, Hashable):
     """Represents a Discord guild text channel.
 
     .. container:: operations
@@ -150,7 +150,7 @@ class TextChannel(discord.abc.Messageable, discord.abc.GuildChannel, Hashable):
         base.value &= ~denied.value
         return base
 
-    permissions_for.__doc__ = discord.abc.GuildChannel.permissions_for.__doc__
+    permissions_for.__doc__ = tfidotabot.abc.GuildChannel.permissions_for.__doc__
 
     @property
     def members(self):
@@ -234,7 +234,7 @@ class TextChannel(discord.abc.Messageable, discord.abc.GuildChannel, Hashable):
             'rate_limit_per_user': self.slowmode_delay
         }, name=name, reason=reason)
 
-    clone.__doc__ = discord.abc.GuildChannel.clone.__doc__
+    clone.__doc__ = tfidotabot.abc.GuildChannel.clone.__doc__
 
     async def delete_messages(self, messages):
         """|coro|
@@ -455,7 +455,7 @@ class TextChannel(discord.abc.Messageable, discord.abc.GuildChannel, Hashable):
         data = await self._state.http.create_webhook(self.id, name=str(name), avatar=avatar, reason=reason)
         return Webhook.from_state(data, state=self._state)
 
-class VoiceChannel(discord.abc.Connectable, discord.abc.GuildChannel, Hashable):
+class VoiceChannel(tfidotabot.abc.Connectable, tfidotabot.abc.GuildChannel, Hashable):
     """Represents a Discord guild voice channel.
 
     .. container:: operations
@@ -560,7 +560,7 @@ class VoiceChannel(discord.abc.Connectable, discord.abc.GuildChannel, Hashable):
             base.value &= ~denied.value
         return base
 
-    permissions_for.__doc__ = discord.abc.GuildChannel.permissions_for.__doc__
+    permissions_for.__doc__ = tfidotabot.abc.GuildChannel.permissions_for.__doc__
 
     async def clone(self, *, name=None, reason=None):
         return await self._clone_impl({
@@ -568,7 +568,7 @@ class VoiceChannel(discord.abc.Connectable, discord.abc.GuildChannel, Hashable):
             'user_limit': self.user_limit
         }, name=name, reason=reason)
 
-    clone.__doc__ = discord.abc.GuildChannel.clone.__doc__
+    clone.__doc__ = tfidotabot.abc.GuildChannel.clone.__doc__
 
     async def edit(self, *, reason=None, **options):
         """|coro|
@@ -607,7 +607,7 @@ class VoiceChannel(discord.abc.Connectable, discord.abc.GuildChannel, Hashable):
 
         await self._edit(options, reason=reason)
 
-class CategoryChannel(discord.abc.GuildChannel, Hashable):
+class CategoryChannel(tfidotabot.abc.GuildChannel, Hashable):
     """Represents a Discord channel category.
 
     These are useful to group channels to logical compartments.
@@ -679,7 +679,7 @@ class CategoryChannel(discord.abc.GuildChannel, Hashable):
             'nsfw': self.nsfw
         }, name=name, reason=reason)
 
-    clone.__doc__ = discord.abc.GuildChannel.clone.__doc__
+    clone.__doc__ = tfidotabot.abc.GuildChannel.clone.__doc__
 
     async def edit(self, *, reason=None, **options):
         """|coro|
@@ -767,7 +767,7 @@ class CategoryChannel(discord.abc.GuildChannel, Hashable):
         """
         return await self.guild.create_voice_channel(name, overwrites=overwrites, category=self, reason=reason, **options)
 
-class StoreChannel(discord.abc.GuildChannel, Hashable):
+class StoreChannel(tfidotabot.abc.GuildChannel, Hashable):
     """Represents a Discord guild store channel.
 
     .. container:: operations
@@ -838,7 +838,7 @@ class StoreChannel(discord.abc.GuildChannel, Hashable):
         base.value &= ~denied.value
         return base
 
-    permissions_for.__doc__ = discord.abc.GuildChannel.permissions_for.__doc__
+    permissions_for.__doc__ = tfidotabot.abc.GuildChannel.permissions_for.__doc__
 
     def is_nsfw(self):
         """Checks if the channel is NSFW."""
@@ -849,7 +849,7 @@ class StoreChannel(discord.abc.GuildChannel, Hashable):
             'nsfw': self.nsfw
         }, name=name, reason=reason)
 
-    clone.__doc__ = discord.abc.GuildChannel.clone.__doc__
+    clone.__doc__ = tfidotabot.abc.GuildChannel.clone.__doc__
 
     async def edit(self, *, reason=None, **options):
         """|coro|
@@ -887,7 +887,7 @@ class StoreChannel(discord.abc.GuildChannel, Hashable):
         """
         await self._edit(options, reason=reason)
 
-class DMChannel(discord.abc.Messageable, Hashable):
+class DMChannel(tfidotabot.abc.Messageable, Hashable):
     """Represents a Discord direct message channel.
 
     .. container:: operations
@@ -974,7 +974,7 @@ class DMChannel(discord.abc.Messageable, Hashable):
         base.manage_messages = False
         return base
 
-class GroupChannel(discord.abc.Messageable, Hashable):
+class GroupChannel(tfidotabot.abc.Messageable, Hashable):
     """Represents a Discord group channel.
 
     .. container:: operations

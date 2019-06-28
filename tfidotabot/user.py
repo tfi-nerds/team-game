@@ -26,7 +26,7 @@ DEALINGS IN THE SOFTWARE.
 
 from collections import namedtuple
 
-import discord.abc
+import tfidotabot.abc
 from .utils import snowflake_time, _bytes_to_base64_data, parse_time
 from .enums import DefaultAvatar, RelationshipType, UserFlags, HypeSquadHouse, PremiumType, try_enum
 from .errors import ClientException
@@ -71,7 +71,7 @@ class Profile(namedtuple('Profile', 'flags user mutual_guilds connected_accounts
         flags = (UserFlags.hypesquad_bravery, UserFlags.hypesquad_brilliance, UserFlags.hypesquad_balance)
         return [house for house, flag in zip(HypeSquadHouse, flags) if self._has_flag(flag)]
 
-_BaseUser = discord.abc.User
+_BaseUser = tfidotabot.abc.User
 
 class BaseUser(_BaseUser):
     __slots__ = ('name', 'id', 'discriminator', 'avatar', 'bot', '_state')
@@ -615,7 +615,7 @@ class ClientUser(BaseUser):
         data = await self._state.http.edit_settings(**payload)
         return data
 
-class User(BaseUser, discord.abc.Messageable):
+class User(BaseUser, tfidotabot.abc.Messageable):
     """Represents a Discord user.
 
     .. container:: operations
