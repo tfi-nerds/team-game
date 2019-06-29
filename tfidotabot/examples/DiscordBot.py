@@ -2,7 +2,8 @@ import tfidotabot
 import random
 import asyncio
 
-TOKEN = 'NTkyNTgwNTY4NjQyNzQ4NDQ1.XRBZ5Q.bus4QuuiteoOE41w1hSdORTkATg'
+#Bot Token Goes Here (BotToken)
+TOKEN = 'BotToken'
 class MyClient(tfidotabot.Client):
     async def on_ready(self):
         print('Logged in as')

@@ -1,18 +1,23 @@
 import tfidotabot
-from tfidotabot.src import entities
-import sys
 
-#User inputs request for matches to query
-matches_request = int(input("Enter amount of matches between 1 and 100 you wish to query : "))
+matches_request = 0
+while(matches_request <= 0 or matches_request > 100):
+    
+    #User inputs request for matches to query
+    matches_request = int(input("Enter amount of matches between 1 and 100 you wish to query : "))
+    if (matches_request > 100 or matches_request < 1):
+        #Prints error if input isnt 1-100
+        print()
+        print('Invalid Entry. Try a number between 1 and 100.')
 
-print()
 
-#Check if matches requested are betwen 1-100
-if (matches_request > 100 or matches_request < 1):
-    print('Invalid Entry. Try a number between 1 and 100.')
-    sys.exit()
 
-api = tfidotabot.APIWrapper('035E388F2B751358EB1098D99C365B86')
+
+    
+
+
+#Registered API number goes here (RegisteredAPINumber)
+api = tfidotabot.APIWrapper('RegisteredAPINumber')
 
 # Fetch amount of matches for Rahul requested by user
 match_history = api.get_match_history(account_id=1234239, matches_requested= matches_request)
